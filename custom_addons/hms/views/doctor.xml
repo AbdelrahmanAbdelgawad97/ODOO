@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record id='doctors_action' model='ir.actions.act_window'>
+            <field name='name'>Doctors</field>
+            <field name='res_model'>hms.doctor</field>
+        </record>
+        
+        <!-- Tree View -->
+        <record id='iti_doctor_tree_view' model='ir.ui.view'>
+            <field name='name'>Doctor Tree View</field>
+            <field name='model'>hms.doctor</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='FirstName'/>
+                    <field name='LastName'/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id='iti_doctor_form_view' model='ir.ui.view'>
+            <field name='name'>Doctor Form View</field>
+            <field name='model'>hms.doctor</field>
+            <field name='arch' type='xml'>
+                <form>
+                    <sheet>
+
+                        <group string='General Information'>
+                            <field name='FirstName'/>
+                            <field name='LastName'/>
+                            <field name='Image'/>
+                            <field name='patients'/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name='DOCTORS' id='doctors_menu' parent='iti_main_menu' action='doctors_action' sequence='2' groups='hms.managers2_group'/>
+    </data>
+</odoo>

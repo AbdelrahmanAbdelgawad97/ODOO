@@ -1,0 +1,100 @@
+<odoo>
+    <data>
+        <record id='students_action' model='ir.actions.act_window'>
+            <field name='name'>Students</field>
+            <field name='res_model'>iti2.student</field>
+        </record>
+
+        <!-- Tree View -->
+        <record id='iti_student_tree_view' model='ir.ui.view'>
+            <field name='name'>Student Tree View</field>
+            <field name='model'>iti2.student</field>
+            <field name='arch' type='xml'>
+                <tree>
+                    <field name='name'/>
+                    <field name='age'/>
+                    <field name='gender'/>
+                    <field name='track'/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id='iti_student_form_view' model='ir.ui.view'>
+            <field name='name'>Student Form View</field>
+            <field name='model'>iti2.student</field>
+            <field name='arch' type='xml'>
+                <form>
+                    <header>
+                        <field name='state' widget='statusbar' nolabel='1' options="{'clickable':'1'}"/>
+                        <button name='ChangeState' string='ChangeLevel' type='object'/>
+                    </header>
+                    <sheet>
+
+                        <group string='General Information'>
+                            <field name='name'/>
+                            <field name='age'/>
+                            <field name='gender'/>
+                            <field name='dob'/>
+                            <field name='graduate_age'/>
+                        </group>
+                        <group string='Extra Information'>
+                            <field name='is_working' invisible='1'/>
+                            <field name='info'/>
+                            <field name='selary' attrs="{'invisible': [('is_working', '=', False)]}"/>
+                            <field name='cv' attrs="{'required': [('is_working', '=', True)]}"/>
+                        </group>
+
+                        <notebook>
+                            <page string='Working Information'>
+                                <group>
+                                    <group>
+                                        <field name='is_working'/>
+                                    </group>
+                                    <group>
+                                        <field name='summery'/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string='Track Information'>
+                                <group>
+                                    <field name='track' domain="[('is_opened', '=', True)]"/>
+                                </group>
+                                <group>
+                                    <field name='trackCapacity'/>
+                                </group>
+                            </page>
+
+                            <page string='Log Information'>
+                                <group>
+                                    <field name='log'/>
+                                </group>
+                                <group>
+                                    <field name='logDescription'/>
+                                </group>
+                            </page>
+                            <!-- The Same -->
+                            <page string='Log Information'>
+                                <field name='log'>
+                                    <tree>
+                                        <field name='create_uid'/>
+                                        <field name='create_date'/>
+                                        <field name='write_uid'/>
+                                        <field name='write_date'/>
+                                        <field name='description'/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <menuitem name='ITI' id='iti_main_menu'/>
+        <menuitem name='STUDENTS' id='students_menu' parent='iti_main_menu' action='students_action' sequence='2'/>
+    </data>
+</odoo>
